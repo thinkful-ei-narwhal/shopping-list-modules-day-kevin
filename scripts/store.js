@@ -17,14 +17,14 @@ function addItem(name) {
 }
 
 function findAndToggleChecked(id) {
-  let foundItem = this.items.findById(id);
-  foundItem.toggleAttribute('checked');
+  let foundItem = this.findById(id);
+  foundItem.checked = !foundItem.checked;
 }
 
 function findAndUpdateName(id,newName) {
   try {
     item.validateName(newName);
-    let foundItem =this.items.findById(id);
+    let foundItem =this.findById(id);
     this.item.foundItem.name = newName;
   } catch(e) {
     console.log(e);
@@ -32,9 +32,13 @@ function findAndUpdateName(id,newName) {
 }
 
 function findAndDelete(id) {
-  let foundItem = findById(id);
-  let foundIndex = this.items.findIndex(foundItem);
-  this.item.splice(foundIndex, 1);
+  let foundItem = this.findById(id);
+  let foundIndex = this.items.indexOf(foundItem);
+  this.items.splice(foundIndex, 1);
+}
+
+function toggleCheckedFilter() {
+  this.hideCheckedItems = !this.hideCheckedItems;
 }
 
 export default {
@@ -45,4 +49,5 @@ export default {
   findAndToggleChecked,
   addItem,
   findById,
+  toggleCheckedFilter,
 };
